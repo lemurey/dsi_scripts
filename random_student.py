@@ -16,7 +16,7 @@ def random_student(s, specific=None):
     shows that students photo, with title of thier name
     if s is a list, it shows a random students name
 
-    if specific is passed, it uses that value as the key of dictionary, or 
+    if specific is passed, it uses that value as the key of dictionary, or
     prints that value if s is a list
     '''
     if isinstance(s, dict):
@@ -47,13 +47,13 @@ def main():
     Can optionally take a specific student name and output their picture
     '''
     if len(sys.argv) > 1 and sys.argv[1].isdigit():
-        base = os.environ['BASESTUDENT']
-        base = base.format(sys.argv[1])
+        base = os.environ['BASESTUDENT'].format(sys.argv[1])
         cur_cohort = base.format('pkl')
         cur_students = base.format('txt')
     else:
         cur_cohort = os.environ['COHORT']
         cur_students = os.environ['STUDENTS']
+
     if os.path.isfile(cur_cohort):
         with open(cur_cohort, 'rb') as f:
             s = pickle.load(f)
@@ -62,13 +62,16 @@ def main():
         with open(cur_students, 'r') as f:
             for line in f:
                 s.append(line.split(',')[-1].strip())
+
+    # hack to make my refusal to use an argument parser work
     if len(sys.argv) == 1:
         sys.argv.append('1')
+
     if len(sys.argv) > 2:
-        return random_student(s,sys.argv[2])
+        return random_student(s, sys.argv[2])
     elif not sys.argv[1].isdigit():
-        return random_student(s,sys.argv[1])
+        return random_student(s, sys.argv[1])
     return random_student(s)
 
 if __name__ == '__main__':
-    main()    
+    main()
