@@ -5,7 +5,7 @@ import pickle, sys, os
 import matplotlib.pyplot as plt
 from numpy.random import choice
 
-def random_student(s, specific = None):
+def random_student(s, specific=None):
     '''
     INPUT:
         s: dictionary of {student name: student picture} or a list of student names
